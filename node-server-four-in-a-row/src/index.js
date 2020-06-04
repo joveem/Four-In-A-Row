@@ -14,6 +14,8 @@ var { setUpModel } = require('./model/setup_model')
 setUpModel();
 setUpWebSockets(http_server);
 
+
+
 express_app.get('/', function (req, res) {
 
     res.send('Hello World!');
@@ -23,16 +25,9 @@ express_app.get('/', function (req, res) {
 require('./controller/auth')(express_app);
 
 
-http_server.listen(2929, function () {
+http_server.listen(process.env.PORT || 2929, function () {
 
-    console.log('Server listening on localhost:2929 port');
-
-})
-
-express_app.listen(2928, function () {
-
-    console.log('API listening on localhost:2928 port');
+    console.log('Server listening on localhost:' + (process.env.PORT || 2929) + ' port');
+    console.log("---server started---");
 
 })
-
-console.log("---server started---");
