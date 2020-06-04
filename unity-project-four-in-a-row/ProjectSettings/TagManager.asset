@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - move_trigger
+  - walkable_ground
   layers:
   - Default
   - TransparentFX
