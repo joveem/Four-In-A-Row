@@ -60,3 +60,6 @@ sysinfo.txt
 
 # crashlytics
 crashlytics-build.properties
+
+# environment scripts
+Unity-project-four-in-a-row/Assets/Scripts/ENVIRONMENT
