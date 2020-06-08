@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using SocketIO;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [Space(30)]
-    public string api_url, socket_url;
+    [Space(20)]
+    public string api_url;
+    public string websocket_url;
+    [Space(5)]
+    public bool local_host;
 
     [Space(30)]
     public string persistent_data;
@@ -18,17 +22,29 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-
-        #if UNITY_STANDALONE
-
-                Screen.SetResolution(240, 420, false);
-                Screen.fullScreen = false;
-                
-        #endif
-
         instance = this;
 
-        //loading_obj.SetActive(false);
+#if UNITY_STANDALONE
+
+        Screen.SetResolution(240, 420, false);
+        Screen.fullScreen = false;
+
+#endif
+
+        if (local_host)
+        {
+
+            api_url = "http://" + env.local_server_url;
+            websocket_url = "ws://" + env.local_server_url + "/socket.io/?EIO=4&transport=websocket";
+
+        }
+        else
+        {
+
+            api_url = "https://" + env.online_server_url;
+            websocket_url = "ws://" + env.online_server_url + "/socket.io/?EIO=4&transport=websocket";
+
+        }
 
     }
     void Start()
@@ -85,16 +101,19 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void LoadGame(string player_number_)
+    public void LoadGame(string player_number_, string player_1_nick_, string player_2_nick_)
     {
+        Debug.Log("loading game..");
 
-        StartCoroutine(LoadGame(int.Parse(player_number_)));
+        StartCoroutine(LoadGame(int.Parse(player_number_), player_1_nick_, player_2_nick_));
 
     }
-    IEnumerator LoadGame(int player_number_)
+    IEnumerator LoadGame(int player_number_, string player_1_nick_, string player_2_nick_)
     {
 
-        persistent_data = player_number_ + ",0";
+        Debug.Log("starting courotine...");
+
+        persistent_data = player_number_ + "," + player_1_nick_ + "," + player_2_nick_;
 
         loading_camera.SetActive(true);
         loading_screem.SetActive(true);
@@ -128,4 +147,20 @@ public class GameManager : MonoBehaviour
         loading_camera.SetActive(false);
 
     }
+
+    public void logOut()
+    {
+
+        PlayerPrefs.DeleteKey("user_infos");
+        DataManager.instance.is_logged_in = false;
+
+        DataManager.instance.text_login.text = "";
+        DataManager.instance.text_password.text = "";
+
+        SceneManager.UnloadScene(1);
+
+        StartCoroutine(FirstLoad());
+
+    }
+
 }

@@ -9,7 +9,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
 
-    public string player_id;
+    public string player_id, player_nick;
     public string[] response_text;
     public bool has_login = false, is_logged_in = false;
     public TMP_InputField text_login, text_password;
@@ -78,6 +78,8 @@ public class DataManager : MonoBehaviour
                     menu_login.SetActive(false);
 
                     player_id = response_text[1];
+
+                    player_nick = response_text[2];
 
                     is_logged_in = true;
 

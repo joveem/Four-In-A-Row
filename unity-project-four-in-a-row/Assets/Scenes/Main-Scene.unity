@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_id: 
+  player_nick: 
   response_text: []
   has_login: 0
   is_logged_in: 0
@@ -638,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961346d7e16a445ff93777573e78efd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: ws://127.0.0.1:2928/socket.io/?EIO=4&transport=websocket
+  url: ws://localhost:2929/socket.io/?EIO=4&transport=websocket
   autoConnect: 0
   reconnectDelay: 5
   ackExpirationTime: 1800
@@ -2389,8 +2390,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3e114bbcf957d4b9a1f1b6feada4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  api_url: http://localhost:2928
-  socket_url: http://localhost:2928
+  api_url: 'CHANGE THIS IN:'
+  websocket_url: Assets\Scripts\ENVIRONMENT\env.cs
+  local_host: 0
   persistent_data: 
   loading_screem: {fileID: 1535105514}
   loading_obj: {fileID: 517515259}
@@ -2640,8 +2642,8 @@ MonoBehaviour:
   m_VerticalScrollbar: {fileID: 0}
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0

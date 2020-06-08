@@ -99,6 +99,8 @@ namespace SocketIO
 			sid = null;
 			packetId = 0;
 
+			url = GameManager.instance.websocket_url;
+
 			ws = new WebSocket(url);
 			ws.OnOpen += OnOpen;
 			ws.OnMessage += OnMessage;

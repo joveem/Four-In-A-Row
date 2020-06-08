@@ -29,6 +29,7 @@ public class NetworkManager : MonoBehaviour
         socket.On("update-players-quantity", UpdatePlayersQuant);
         socket.On("send-position-to-client", OnSendPositionToClient);
         socket.On("send-piece-move-to-client", OnSendPieceMoveToClient);
+        socket.On("send-message-to-client", OnSendMessageToClient);
 
     }
 
@@ -41,7 +42,7 @@ public class NetworkManager : MonoBehaviour
 
         socket.Connect();
 
-        GameManager.instance.loading_alert.SetActive(true);
+        //GameManager.instance.loading_alert.SetActive(true);
 
     }
 
@@ -62,14 +63,10 @@ public class NetworkManager : MonoBehaviour
     void DebugConnectionResult(SocketIOEvent message_)
     {
 
-        if (minigame_number == 6)
-        {
+        Dictionary<string, string> pack_ = message_.data.ToDictionary();
 
-            MenuManager.instance.ShowFiarLobby();
-
-        }
-
-        Dictionary<string, string> pack_ = new Dictionary<string, string>();
+        Debug.Log("- connection result: ");
+        Debug.Log(pack_["result"]);
 
         if (pack_["result"] == "succeed")
         {
@@ -79,7 +76,7 @@ public class NetworkManager : MonoBehaviour
             if (minigame_number == 6)
             {
 
-                MenuManager.instance.ShowFiarLobby();
+                MenuUiManager.instance.showFiarLobby();
 
             }
 
@@ -88,6 +85,7 @@ public class NetworkManager : MonoBehaviour
         {
 
             Debug.Log("- connection has failed (player already is connected)");
+            MenuUiManager.instance.showConnectionError();
 
         }
 
@@ -115,8 +113,6 @@ public class NetworkManager : MonoBehaviour
 
         socket.Emit("fiar-enter-random-room", new JSONObject(pack_));
 
-        GameManager.instance.loading_alert.SetActive(true);
-
     }
 
     public void SendPositionToServer()
@@ -134,7 +130,7 @@ public class NetworkManager : MonoBehaviour
 
     }
 
-    public void SendPieceMove(int column_number_, int player_number_)
+    public void SendPieceMoveToServer(int column_number_, int player_number_)
     {
 
         Dictionary<string, string> pack_ = new Dictionary<string, string>();
@@ -146,16 +142,32 @@ public class NetworkManager : MonoBehaviour
 
     }
 
+    public void SendMessageToServer(int player_number_, string message)
+    {
+
+        Dictionary<string, string> pack_ = new Dictionary<string, string>();
+
+        pack_["player_number"] = player_number_.ToString();
+        pack_["message"] = message;
+
+        socket.Emit("send-message-to-server", new JSONObject(pack_));
+
+    }
+
     void EnterGame(SocketIOEvent message_)
     {
 
+        Debug.Log("- openning game...");
+
         Dictionary<string, string> msg_ = message_.data.ToDictionary();
+
+        Debug.Log(msg_["player_number"] + " - ");
+        Debug.Log(msg_["player_1_nick"] + " - ");
+        Debug.Log(msg_["player_2_nick"] + " - ");
 
         GameManager.instance.loading_alert.SetActive(false);
 
-        GameManager.instance.LoadGame(msg_["player_number"]);
-
-        Debug.Log("- openning game...");
+        GameManager.instance.LoadGame(msg_["player_number"], msg_["player_1_nick"], msg_["player_2_nick"]);
 
     }
 
@@ -187,7 +199,14 @@ public class NetworkManager : MonoBehaviour
 
         FourInARow.instance.ReproducePieceMove(int.Parse(msg_["column_number"]), int.Parse(msg_["player_number"]));
 
+    }
 
+    void OnSendMessageToClient(SocketIOEvent message_)
+    {
+
+        Dictionary<string, string> msg_ = message_.data.ToDictionary();
+
+        ChatManager.instance.AddMessage(int.Parse(msg_["player_number"]),msg_["message"]);
 
     }
 }
