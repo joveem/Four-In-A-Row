@@ -7,6 +7,7 @@ public class ChatManager : MonoBehaviour
 {
     public static ChatManager instance;
 
+    public float temporary_messages_duration = 5;
     public TMP_InputField chat_input_field;
     public GameObject temporary_chat_pivot, entire_chat_pivot;
     public GameObject[] message_prefabs;
@@ -53,12 +54,12 @@ public class ChatManager : MonoBehaviour
 
         }
 
-        GameObject inst_ = Instantiate(message_prefabs[player_number_ == FourInARow.instance.player_number ? 0 : 1], new Vector3(), new Quaternion(), temporary_chat_pivot.transform);
+        var inst_ = Instantiate(message_prefabs[player_number_ == FourInARow.instance.player_number ? 0 : 1], new Vector3(), new Quaternion(), temporary_chat_pivot.transform);
 
         inst_.GetComponent<ChatMessage>().SetContent(player_number_, message_content_, true);
 
-        GameObject inst_2_ = Instantiate(message_prefabs[player_number_ == FourInARow.instance.player_number ? 0 : 1], new Vector3(), new Quaternion(), entire_chat_pivot.transform);
+        var inst_2_ = Instantiate(message_prefabs[player_number_ == FourInARow.instance.player_number ? 0 : 1], new Vector3(), new Quaternion(), entire_chat_pivot.transform);
 
-        inst_.GetComponent<ChatMessage>().SetContent(player_number_, message_content_, false);
+        inst_2_.GetComponent<ChatMessage>().SetContent(player_number_, message_content_, false);
     }
 }
