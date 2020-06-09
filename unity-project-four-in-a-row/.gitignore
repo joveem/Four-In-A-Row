@@ -62,4 +62,6 @@ sysinfo.txt
 crashlytics-build.properties
 
 # environment scripts
-/[Aa]ssets/Scripts/ENVIRONMENT
+/Assets/Scripts/ENVIRONMENT
+/Assets/Scripts/ENVIRONMENT/*.cs
+/Assets/Scripts/ENVIRONMENT/*.*
