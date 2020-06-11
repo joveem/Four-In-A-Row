@@ -2313,7 +2313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   api_url: 'CHANGE THIS IN:'
   websocket_url: Assets\Scripts\ENVIRONMENT\env.cs
-  local_host: 0
+  local_host: 1
   persistent_data: 
   loading_screem: {fileID: 1535105514}
   loading_obj: {fileID: 517515259}
