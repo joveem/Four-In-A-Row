@@ -7,14 +7,14 @@ public class Item : ScriptableObject
 {
     public int id = 0;
     public string item_name = "Item Name";
-    public ItemType type = ItemType.cloth;
+    public ItemType type = ItemType.item;
     public Sprite sprite;
-    public GameManager prefab;
+    public GameObject prefab;
 }
 
 public enum ItemType{
 
-    cloth,
+    item,
     skin
 
 }

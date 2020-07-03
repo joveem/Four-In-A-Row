@@ -199,6 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103355484}
   - component: {fileID: 103355485}
+  - component: {fileID: 103355486}
   m_Layer: 0
   m_Name: '[DataManager]'
   m_TagString: Untagged
@@ -234,12 +235,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_id: 
   player_nick: 
+  appearance: 0
   response_text: []
   has_login: 0
   is_logged_in: 0
   text_login: {fileID: 442343698}
   text_password: {fileID: 1872340585}
   menu_login: {fileID: 1854445380}
+--- !u!114 &103355486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103355483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d5074a03e669e41b34be144274040e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itens:
+  - {fileID: 11400000, guid: c76f1ff8be63eee4f958795b99fd5f3e, type: 2}
+  - {fileID: 11400000, guid: 26334b9d8d2523c4ab64b43638b38c15, type: 2}
+  - {fileID: 11400000, guid: ffd755d2f918f5144823f953e7fd1fb8, type: 2}
+  - {fileID: 11400000, guid: e7d2cba50ff0c3949ba1456d3fd4e31a, type: 2}
+  - {fileID: 11400000, guid: 866d95d644029ef4c82bd11a3bb43235, type: 2}
+  - {fileID: 11400000, guid: 843f0a204a96d3d40beb5aa3a99fda0b, type: 2}
+  - {fileID: 11400000, guid: 61eb18984e76a0f448f9720412148f2d, type: 2}
+  - {fileID: 11400000, guid: 49533a720a4ec3a42b897f56ef4d2606, type: 2}
+  - {fileID: 11400000, guid: 8753ffca260b14d40b05c921b57bcda8, type: 2}
+  - {fileID: 11400000, guid: 52799c055684a96478aaa06e5dd3503c, type: 2}
+  - {fileID: 11400000, guid: 10a9bf8724cf8154e8a1da0c76809901, type: 2}
 --- !u!1 &153997216
 GameObject:
   m_ObjectHideFlags: 0

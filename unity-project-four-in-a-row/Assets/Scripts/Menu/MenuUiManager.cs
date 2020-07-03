@@ -10,17 +10,23 @@ public class MenuUiManager : MonoBehaviour
     public bool is_showing_lobby = false, is_showing_enter_random_room_menu = false, is_showing_searching_room_menu = false;
     public bool is_showing_connection_error_menu = false;
     public bool is_showing_options_menu = false;
+    public bool is_showing_customization_menu = false;
 
     public TextMeshProUGUI nick_text;
     public GameObject fiar_lobby, random_room_menu, searching_room_menu;
     public GameObject connection_error_menu;
     public GameObject options_menu;
+    public GameObject customization_menu;
+    
+    public GameObject player_preview;
 
     void Awake()
     {
 
         instance = this;
         nick_text.text = DataManager.instance.player_nick;
+
+        player_preview.GetComponent<Appearance>().applyAppearance(DataManager.instance.appearance);
 
     }
 
@@ -58,6 +64,12 @@ public class MenuUiManager : MonoBehaviour
             {
 
                 optionsCloseButton();
+
+            }
+            else if (is_showing_customization_menu)
+            {
+
+                customizationCloseButton();
 
             }
 
@@ -133,33 +145,55 @@ public class MenuUiManager : MonoBehaviour
 
     }
 
-    public void showConnectionError(){
+    public void showConnectionError()
+    {
 
         is_showing_connection_error_menu = true;
         connection_error_menu.SetActive(true);
 
     }
-    public void connectionErrorCloseButton(){
+    public void connectionErrorCloseButton()
+    {
 
         is_showing_connection_error_menu = false;
         connection_error_menu.SetActive(false);
 
     }
 
-    public void showOptions(){
+    public void showOptions()
+    {
 
         is_showing_options_menu = true;
         options_menu.SetActive(true);
 
     }
-    public void optionsCloseButton(){
+    public void optionsCloseButton()
+    {
 
         is_showing_options_menu = false;
         options_menu.SetActive(false);
 
     }
 
-    public void logOutButton(){
+    public void showCustomization()
+    {
+
+        is_showing_customization_menu = true;
+        customization_menu.SetActive(true);
+
+    }
+    public void customizationCloseButton()
+    {
+
+        is_showing_customization_menu = false;
+        customization_menu.SetActive(false);
+
+        StartCoroutine(DataManager.instance.updateAppearanceInServer());
+
+    }
+
+    public void logOutButton()
+    {
 
         GameManager.instance.logOut();
 

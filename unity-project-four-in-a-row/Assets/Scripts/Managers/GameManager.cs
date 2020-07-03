@@ -101,19 +101,19 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void LoadGame(string player_number_, string player_1_nick_, string player_2_nick_)
+    public void LoadGame(string player_number_, string player_1_nick_, string player_2_nick_, string player_1_appearance_, string player_2_appearance_)
     {
         Debug.Log("loading game..");
 
-        StartCoroutine(LoadGame(int.Parse(player_number_), player_1_nick_, player_2_nick_));
+        StartCoroutine(LoadGame(int.Parse(player_number_), player_1_nick_, player_2_nick_, player_1_appearance_, player_2_appearance_));
 
     }
-    IEnumerator LoadGame(int player_number_, string player_1_nick_, string player_2_nick_)
+    IEnumerator LoadGame(int player_number_, string player_1_nick_, string player_2_nick_, string player_1_appearance_, string player_2_appearance_)
     {
 
         Debug.Log("starting courotine...");
 
-        persistent_data = player_number_ + "," + player_1_nick_ + "," + player_2_nick_;
+        persistent_data = player_number_ + "," + player_1_nick_ + "," + player_2_nick_ + "," + player_1_appearance_ + "," + player_2_appearance_;
 
         loading_camera.SetActive(true);
         loading_screem.SetActive(true);

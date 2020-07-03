@@ -7,7 +7,7 @@ public class FourInARow : MonoBehaviour
 {
     public static FourInARow instance;
 
-    public int player_number;
+    public int player_number, moves = 0;
     public string[] table_rows = new string[6] { "0000000", "0000000", "0000000", "0000000", "0000000", "0000000" };
 
     public bool can_move = true, is_selecting_move;
@@ -48,6 +48,10 @@ public class FourInARow : MonoBehaviour
             local_player = Instantiate(player_prefab, player_spawn[0].transform.position, player_spawn[0].transform.rotation);
             server_player = Instantiate(player_prefab, player_spawn[1].transform.position, player_spawn[1].transform.rotation);
 
+            local_player.GetComponent<Appearance>().applyAppearance(int.Parse(GameManager.instance.persistent_data.Split(',')[3]));
+            server_player.GetComponent<Appearance>().applyAppearance(int.Parse(GameManager.instance.persistent_data.Split(',')[4]));
+
+
             can_move = true;
 
 
@@ -60,6 +64,10 @@ public class FourInARow : MonoBehaviour
 
             local_player = Instantiate(player_prefab, player_spawn[1].transform.position, player_spawn[1].transform.rotation);
             server_player = Instantiate(player_prefab, player_spawn[0].transform.position, player_spawn[0].transform.rotation);
+
+            local_player.GetComponent<Appearance>().applyAppearance(int.Parse(GameManager.instance.persistent_data.Split(',')[4]));
+            server_player.GetComponent<Appearance>().applyAppearance(int.Parse(GameManager.instance.persistent_data.Split(',')[3]));
+
 
             can_move = false;
 

@@ -12,7 +12,7 @@ Its Front-End is made in [Unity 3D](https://unity.com/) with C#, its Back-End is
 
 ---
 
-### Getting Started:installed to run it
+### Getting Started:
 
 ##### Cloning the repository:
 

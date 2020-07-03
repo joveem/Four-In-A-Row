@@ -167,7 +167,7 @@ public class NetworkManager : MonoBehaviour
 
         GameManager.instance.loading_alert.SetActive(false);
 
-        GameManager.instance.LoadGame(msg_["player_number"], msg_["player_1_nick"], msg_["player_2_nick"]);
+        GameManager.instance.LoadGame(msg_["player_number"], msg_["player_1_nick"], msg_["player_2_nick"], msg_["player_1_appearance"], msg_["player_2_appearance"]);
 
     }
 
